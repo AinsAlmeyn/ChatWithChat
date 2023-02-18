@@ -21,20 +21,19 @@ namespace OpenAI.Helpers.Services.OpenAICompletion
 
         public async Task<GetOneResult<CompletionCreateResponse>> CreateChatCompletion(string promptData)
         {
-            CompletionCreateResponse completionCreateResponse = new();
+            CompletionCreateResponse chatCompletionCreateResponse = new();
             try
             {
-                
-                completionCreateResponse = await _openAIService.Completions.CreateCompletion(new CompletionCreateRequest()
+                chatCompletionCreateResponse = await _openAIService.Completions.CreateCompletion(new CompletionCreateRequest()
                 {
                     Prompt = promptData,
                     MaxTokens = 2500
                 }, Models.TextDavinciV3);
                 return new GetOneResult<CompletionCreateResponse>
                 {
-                    Entity = completionCreateResponse,
-                    IsSuccess = completionCreateResponse.Successful,
-                    Message = completionCreateResponse.Choices[0].Text
+                    Entity = chatCompletionCreateResponse,
+                    IsSuccess = chatCompletionCreateResponse.Successful,
+                    Message = chatCompletionCreateResponse.Choices[0].Text
                 };
             }
             catch (Exception ex)
@@ -42,7 +41,7 @@ namespace OpenAI.Helpers.Services.OpenAICompletion
                 string exceptionMessage = ex.Message + " " + ex.InnerException?.Message;
                 return new GetOneResult<CompletionCreateResponse>{
                     IsSuccess = false,
-                    Message = exceptionMessage + " " + completionCreateResponse.Error
+                    Message = exceptionMessage + " " + chatCompletionCreateResponse.Error
                 };
             }
             

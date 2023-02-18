@@ -15,9 +15,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-builder.Services.AddOpenAIService(settings => settings.ApiKey = "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");
+// builder.Services.AddOpenAIService(settings => settings.ApiKey = "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");
+builder.Services.AddOpenAIService(settings => settings.ApiKey = "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");
 builder.Services.AddScoped(typeof(IOpenAIService), typeof(OpenAIService));
 builder.Services.AddScoped(typeof(IOpenAICompletionServices), typeof(OpenAICompletionServices));
+builder.Services.AddScoped(typeof(IOpenAIImageServices), typeof(OpenAIImageServices));
 builder.Services.AddAutoMapper(typeof(CompletionProfiles));
 
 var app = builder.Build();
